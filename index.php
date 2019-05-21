@@ -1,5 +1,5 @@
 <?php
-require("config.ini.php"); //包含設定檔
+require("config.php"); //包含設定檔
 
 ?>
 <center>
