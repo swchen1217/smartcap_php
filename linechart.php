@@ -1,6 +1,6 @@
 <?php
-require("config.ini.php");
-define('TTF_DIR', './jpgraph/');
+require("config.php");
+//define('TTF_DIR', './jpgraph/fonts/');
 include('jpgraph/jpgraph.php');
 include('jpgraph/jpgraph_line.php');
 
@@ -25,11 +25,11 @@ if($user != "")
 	$data1 = array();
 	$label = array();
 	$idx = 0;
-	$sql = "select user,start,usetime,ngtime from logtb where user = '".$user."'";
-	$rs = mysql_query($sql);
-	if(mysql_num_rows($rs) == 0)
+	$sql = "select user,starttime,usetime,ngtimes from mainlogtb where user = '".$user."'";
+	$rs = mysqli_query($con,$sql);
+	if(mysqli_num_rows($rs) == 0)
 		exit;
-	while(list($uu,$start,$usetime,$ngtime)=mysql_fetch_row($rs))
+	while(list($uu,$start,$usetime,$ngtime)=mysqli_fetch_row($rs))
 	{
 		$label[$idx] = $start;
 		$data1[$idx] = $usetime/($ngtime==0?1:$ngtime);
@@ -56,6 +56,7 @@ if($user != "")
 	$graph->legend->SetFrameWeight(1);
 	$graph->legend->SetColor('#4E4E4E','#00A78A');
 	$graph->legend->SetMarkAbsSize(8);
+    $graph->legend->SetPos(0,0,'right','top');
 
 
 	// Output line
