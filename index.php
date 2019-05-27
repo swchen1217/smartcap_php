@@ -21,6 +21,14 @@ if(isset($_GET["ngtime"]))
 $ngsecond = "";
 if(isset($_GET["ngsecond"]))
 	$ngsecond=$_GET["ngsecond"];
+if(isset($_GET["del"]) && $_GET["del"] == "true")
+{
+	$sql = "delete from mainlogtb";
+	mysqli_query($con,$sql);
+    $sql = "delete from slogtb";
+	mysqli_query($con,$sql);
+	exit;
+}
 if($user!=""){
     if($starttime!=""){
         if($usetime!="" && $ngtimes!="" && $usetime > 0){
@@ -41,7 +49,7 @@ if($user!=""){
 			exit;
 		echo $user."的使用紀錄列表";
 		echo "<table width='100%' align='center' bgcolor='black'>";
-		echo "<tr bgcolor='#FFFFFF'><td>使用時間</td><td>計時(時:分:秒)</td><td>警示次數</td><td>平均警示時間</td><td>單次使用警示狀況</td></tr>";
+		echo "<tr bgcolor='#FFFFFF'><td>開始時間</td><td>計時(時:分:秒)</td><td>警示次數</td><td>平均警示時間</td><td>單次使用警示狀況</td></tr>";
 		while(list($starttime2,$usetime2,$ngtimes2)=mysqli_fetch_row($rs))
 		{
 			$s = $usetime2%60;

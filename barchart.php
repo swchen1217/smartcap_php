@@ -1,6 +1,6 @@
 <?php
 require("config.php");
-//define('TTF_DIR', './jpgraph/');
+define('TTF_DIR', './jpgraph/fonts/');
 include('jpgraph/jpgraph.php');
 include('jpgraph/jpgraph_bar.php');
 $color=array("a","1","7","b","2","c","4","d","5","0","e","3","8","f","6","9");
@@ -16,6 +16,10 @@ if($user != "")
 
 	$graph->title->SetFont(FF_BIG5);
 	$graph->title->Set(mb_convert_encoding($user,"big5","utf-8").'與其他使用者比較長條圖');
+    $graph -> yaxis -> title -> SetFont ( FF_BIG5 );
+    $graph -> xaxis -> title -> SetFont ( FF_BIG5 );
+    $graph->xaxis->title->Set('次數');
+    $graph->yaxis->title->Set('間時示警均平');
 	$graph->SetBox(false);
 
 	$graph->yaxis->HideZeroLabel();
@@ -77,6 +81,7 @@ if($user != "")
 	$graph->legend->SetFrameWeight(1);
 	$graph->legend->SetColor('#4E4E4E','#00A78A');
 	$graph->legend->SetMarkAbsSize(8);
+    $graph->legend->SetPos(0,0,'right','top');
 
 
 	// Output line

@@ -1,6 +1,6 @@
 <?php
 require("config.php");
-//define('TTF_DIR', './jpgraph/fonts/');
+define('TTF_DIR', './jpgraph/fonts/');
 include('jpgraph/jpgraph.php');
 include('jpgraph/jpgraph_line.php');
 
@@ -16,6 +16,10 @@ if($user != "")
 
 	$graph->title->SetFont(FF_BIG5);
 	$graph->title->Set(mb_convert_encoding($user,"big5","utf-8").'使用狀況折線圖');
+    $graph -> yaxis -> title -> SetFont ( FF_BIG5 );
+    $graph -> xaxis -> title -> SetFont ( FF_BIG5 );
+    $graph->xaxis->title->Set('開始時間');
+    $graph->yaxis->title->Set('間時示警均平');
 	$graph->SetBox(false);
 
 	$graph->yaxis->HideZeroLabel();
@@ -44,13 +48,13 @@ if($user != "")
 	$p1 = new LinePlot($data1);
 	$graph->Add($p1);
 
-
 	$p1->SetColor("#55bbdd");
 	$p1->SetLegend('平均警示時間');
 	$p1->mark->SetType(MARK_FILLEDCIRCLE,'',1.0);
 	$p1->mark->SetColor('#55bbdd');
 	$p1->mark->SetFillColor('#55bbdd');
 	$p1->SetCenter();
+    $p1->SetWeight(4);
 
 	$graph->legend->SetFont(FF_BIG5);
 	$graph->legend->SetFrameWeight(1);
