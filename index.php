@@ -56,7 +56,7 @@ if($user!=""){
 			$t = ($usetime2-$s)/60;
 			$m = $t%60;
 			$h = ($t-$m)/60;
-			echo "<tr bgcolor='#FFFFFF'><td>".$starttime2."</td><td>".$h.":".$m.":".$s."</td><td>".$ngtimes2."</td><td>".($ngtimes2==0?"---":intval($usetime2/$ngtimes2))."</td><td><a href=".'"'."./ngslinechart.php?user=".$user."&starttime=".$starttime2.'"'.">折線圖</a></td></tr>";
+			echo "<tr bgcolor='#FFFFFF'><td>".$starttime2."</td><td>".$h.":".$m.":".$s."</td><td>".$ngtimes2."</td><td>".($ngtimes2==0?"-":intval($usetime2/$ngtimes2))."</td><td>".($ngtimes2==0?'-':("<a href=".'"'."./ngslinechart.php?user=".$user."&starttime=".$starttime2.'"'.">折線圖</a>"))."</td></tr>";
 		}
         echo "</table>";
 	//}
