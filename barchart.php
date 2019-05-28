@@ -13,13 +13,19 @@ if($user != "")
 	// Setup the graph
 	$graph = new Graph(600,400);
 	$graph->SetScale("textlin");
+    
+    $theme_class = new SoftyTheme;
+    $graph->SetTheme($theme_class);
 
+    $graph->SetMargin(45,10,20,20);
 	$graph->title->SetFont(FF_BIG5);
 	$graph->title->Set(mb_convert_encoding($user,"big5","utf-8").'與其他使用者比較長條圖');
     $graph -> yaxis -> title -> SetFont ( FF_BIG5 );
     $graph -> xaxis -> title -> SetFont ( FF_BIG5 );
-    $graph->xaxis->title->Set('次數');
-    $graph->yaxis->title->Set('間時示警均平');
+    $graph->xaxis->SetTitle('次數','high');
+    $graph->yaxis->SetTitle('s  間時示警均平','high');
+    $graph->xaxis->SetTitlemargin(10);
+    $graph->yaxis->SetTitlemargin(35);
 	$graph->SetBox(false);
 
 	$graph->yaxis->HideZeroLabel();
@@ -43,9 +49,14 @@ if($user != "")
 		$i++;
 	}
 	$b1plot = new BarPlot($data1);
+    //$b1plot->value->Show();
 	$b1plot->SetLegend(mb_convert_encoding($user,"big5","utf-8").'的平均警示時間');
 	$b1plot->SetColor("white");
 	$b1plot->SetFillColor("#cc1111");
+    /*$b1plot->value->SetFormat('%d');
+    $b1plot->value->Show();
+    $b1plot->value->SetColor('black');
+    $b1plot->value->SetMargin(8);*/
 	$groupbar[$idx] = $b1plot;
 	
 	$sql = "select user from mainlogtb where user <> '".$user."' group by user";
@@ -82,6 +93,7 @@ if($user != "")
 	$graph->legend->SetColor('#4E4E4E','#00A78A');
 	$graph->legend->SetMarkAbsSize(8);
     $graph->legend->SetPos(0,0,'right','top');
+    $graph->legend->SetLayout(LEGEND_VERT);
 
 
 	// Output line

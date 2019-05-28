@@ -16,15 +16,20 @@ if($user != "" && $starttime!="")
 	// Setup the graph
 	$graph = new Graph(600,400);
 	$graph->SetScale("textlin");
+    
+    $theme_class = new SoftyTheme;
+    $graph->SetTheme($theme_class);
 
-	$graph->title->SetFont(FF_BIG5);
+    $graph->title->SetFont(FF_BIG5);
 	$graph->title->Set(mb_convert_encoding($user,"big5","utf-8").'單次使用警示狀況折線圖');
 	$graph->subtitle->Set('('.$starttime.')');
-    $graph->SetMargin(40,20,20,40);
+    $graph->SetMargin(55,10,20,20);
     $graph -> yaxis -> title -> SetFont ( FF_BIG5 );
     $graph -> xaxis -> title -> SetFont ( FF_BIG5 );
-    $graph->xaxis->title->Set('姿勢不良時間');
-    $graph->yaxis->title->Set('sm 數秒續持良不勢姿');
+    $graph->xaxis->SetTitle('姿勢不良時間','high');
+    $graph->yaxis->SetTitle('sm 數秒續持良不勢姿','high');
+    $graph->xaxis->SetTitlemargin(10);
+    $graph->yaxis->SetTitlemargin(50);
 	$graph->SetBox(false);
 
 	$graph->yaxis->HideZeroLabel();
@@ -62,6 +67,10 @@ if($user != "" && $starttime!="")
 	$p1->mark->SetFillColor('#55bbdd');
 	$p1->SetCenter();
     $p1->SetWeight(4);
+    $p1->value->SetFormat('%d');
+    $p1->value->Show();
+    $p1->value->SetColor('black');
+    $p1->value->SetMargin(8);
 
 	$graph->legend->SetFont(FF_BIG5);
 	$graph->legend->SetFrameWeight(1);
