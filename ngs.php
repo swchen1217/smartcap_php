@@ -22,6 +22,11 @@ if($user!="" && $starttime!=""){
 			echo "<tr bgcolor='#FFFFFF'><td>".$ngtime."</td><td>".$ngsecond."</td></tr>";
 		}
         echo "</table>";
+//}
+?>
+<br>
+<img src="./ngslinechart.php?user=<?php echo $user;?>&starttime=<?php echo $starttime;?>">
+<?php
 }
 ?>
 </center>
