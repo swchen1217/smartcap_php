@@ -23,7 +23,7 @@ if($user != "")
     $graph -> yaxis -> title -> SetFont ( FF_BIG5 );
     $graph -> xaxis -> title -> SetFont ( FF_BIG5 );
     $graph->xaxis->SetTitle('開始時間','high');
-    $graph->yaxis->SetTitle('s  間時示警均平','high');
+    $graph->yaxis->SetTitle('秒 間時示警均平','high');
     $graph->xaxis->SetTitlemargin(10);
     $graph->yaxis->SetTitlemargin(35);
 	$graph->SetBox(false);
@@ -42,7 +42,8 @@ if($user != "")
 	while(list($uu,$start,$usetime,$ngtime)=mysqli_fetch_row($rs))
 	{
 		$label[$idx] = $start;
-		$data1[$idx] = $usetime/($ngtime==0?1:$ngtime);
+		//$data1[$idx] = $usetime/($ngtime==0?1:$ngtime);
+		$data1[$idx] = ($ngtime==0?0:($usetime)/$ngtime);
 		$idx++;
 	}
 	for($i=1;$i<$idx-1;$i++)

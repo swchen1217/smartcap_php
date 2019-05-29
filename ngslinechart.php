@@ -27,7 +27,7 @@ if($user != "" && $starttime!="")
     $graph -> yaxis -> title -> SetFont ( FF_BIG5 );
     $graph -> xaxis -> title -> SetFont ( FF_BIG5 );
     $graph->xaxis->SetTitle('姿勢不良時間','high');
-    $graph->yaxis->SetTitle('sm 數秒續持良不勢姿','high');
+    $graph->yaxis->SetTitle('秒 數秒續持良不勢姿','high');
     $graph->xaxis->SetTitlemargin(10);
     $graph->yaxis->SetTitlemargin(50);
 	$graph->SetBox(false);
@@ -67,7 +67,7 @@ if($user != "" && $starttime!="")
 	$p1->mark->SetFillColor('#55bbdd');
 	$p1->SetCenter();
     $p1->SetWeight(4);
-    $p1->value->SetFormat('%d');
+    //$p1->value->SetFormat('%d');
     $p1->value->Show();
     $p1->value->SetColor('black');
     $p1->value->SetMargin(8);

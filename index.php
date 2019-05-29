@@ -37,7 +37,7 @@ if($user!=""){
             exit;
         }
         else if($ngtime!="" && $ngsecond!=""){
-            $sql = "insert into slogtb(user,starttime,ngtime,ngsecond)values('".$user."','".$starttime."','".$ngtime."','".$ngsecond."')";
+            $sql = "insert into slogtb(user,starttime,ngtime,ngsecond)values('".$user."','".$starttime."','".$ngtime."','".($ngsecond/1000)."')";
             mysqli_query($con,$sql);
             exit;
         }
@@ -49,23 +49,41 @@ if($user!=""){
 			exit;
 		echo $user."的使用紀錄列表";
 		echo "<table width='100%' align='center' bgcolor='black'>";
-		echo "<tr bgcolor='#FFFFFF'><td>開始時間</td><td>計時(時:分:秒)</td><td>警示次數</td><td>平均警示時間</td><td>單次使用警示狀況</td></tr>";
+		echo "<tr bgcolor='#FFFFFF'><td>開始時間</td><td>計時(時:分:秒)</td><td>警示次數</td><td>平均警示時間(秒/1次)</td><td>姿勢不良時間加總(時:分:秒)</td><td>姿勢不良(%)</td><td>表現評分</td><td>單次使用警示狀況</td></tr>";
 		while(list($starttime2,$usetime2,$ngtimes2)=mysqli_fetch_row($rs))
 		{
 			$s = $usetime2%60;
 			$t = ($usetime2-$s)/60;
 			$m = $t%60;
 			$h = ($t-$m)/60;
-			echo "<tr bgcolor='#FFFFFF'><td>".$starttime2."</td><td>".$h.":".$m.":".$s."</td><td>".$ngtimes2."</td><td>".($ngtimes2==0?"-":intval($usetime2/$ngtimes2))."</td><td>".($ngtimes2==0?'-':("<a href=".'"'."./ngs.php?user=".$user."&starttime=".$starttime2.'"'.">單次使用紀錄</a>"))."</td></tr>";
+            $tmp=0;
+            if($ngtimes2!=0){
+                $ngs_sum=0;
+                $sql = "select ngsecond from slogtb where user = '".$user."' and starttime = '".$starttime2."'";
+                $rs2 = mysqli_query($con,$sql);
+                while(list($ngsecond2)=mysqli_fetch_row($rs2))
+                {
+                    $ngs_sum+=(float)$ngsecond2;
+                }
+                $s2 = intval($ngs_sum)%60;
+                $t2 = (intval($ngs_sum)-$s2)/60;
+                $m2 = $t2%60;
+                $h2 = ($t2-$m2)/60;
+                $tmp=number_format(($ngs_sum*100/(int)$usetime2),2);
+            }
+            $str="";
+            $tmp<=50?($tmp<=15?($str='<font color="green">非常棒</font>'):($str='<font color="orange">還不錯</font>')):($str='<font color="red">待加強</font>');
+            $str="<b>".$str."</b>";
+			echo "<tr bgcolor='#FFFFFF'><td>".$starttime2."</td><td>".$h.":".$m.":".$s."</td><td>".$ngtimes2."</td><td>".($ngtimes2==0?"-":intval($usetime2/$ngtimes2))."</td><td>".($ngtimes2==0?"-":($h2.":".$m2.":".$s2.".".substr(number_format(($ngs_sum-intval($ngs_sum)),3),2)))."</td><td>".$tmp."%</td><td>".$str."</td><td>".($ngtimes2==0?'-':("<a href=".'"'."./ngs.php?user=".$user."&starttime=".$starttime2.'"'.">單次使用紀錄</a>"))."</td></tr>";
 		}
         echo "</table>";
 	//}
 }
 ?>
 <br>
-<img src="./linechart.php?user=<?php echo $user;?>"> <!--畫出折線圖-->
+<img src="./linechart.php?user=<?php echo $user;?>">
 <br><br>
-<img src="./barchart.php?user=<?php echo $user;?>">  <!--畫出直方圖-->
+<img src="./barchart.php?user=<?php echo $user;?>">
 <?php
       }
 ?>

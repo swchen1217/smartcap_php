@@ -23,7 +23,7 @@ if($user != "")
     $graph -> yaxis -> title -> SetFont ( FF_BIG5 );
     $graph -> xaxis -> title -> SetFont ( FF_BIG5 );
     $graph->xaxis->SetTitle('次數','high');
-    $graph->yaxis->SetTitle('s  間時示警均平','high');
+    $graph->yaxis->SetTitle('秒 間時示警均平','high');
     $graph->xaxis->SetTitlemargin(10);
     $graph->yaxis->SetTitlemargin(35);
 	$graph->SetBox(false);
@@ -45,7 +45,7 @@ if($user != "")
 	while(list($uu,$start,$usetime,$ngtime)=mysqli_fetch_row($rs))
 	{
 		$label[$i] = $i+1;
-		$data1[$i] = $usetime/($ngtime==0?1:$ngtime);
+		$data1[$i] = ($ngtime==0?0:($usetime)/$ngtime);
 		$i++;
 	}
 	$b1plot = new BarPlot($data1);
@@ -71,7 +71,7 @@ if($user != "")
 		while(list($start,$usetime,$ngtime)=mysqli_fetch_row($rs2))
 		{
 			$label[$i] = $i+1;
-			$data1[$i] = $usetime/($ngtime==0?1:$ngtime);
+			$data1[$i] = ($ngtime==0?0:($usetime)/$ngtime);
 			$i++;
 		}
 		$b1plot = new BarPlot($data1);	
