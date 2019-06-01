@@ -28,9 +28,9 @@ if($user!="" && $starttime!=""){
         $rs = mysqli_query($con,$sql);
         list($usetime)=mysqli_fetch_row($rs);
         $tmp=number_format(($ngs_sum*100/(int)$usetime),2);
-        echo '<font color="blue">本次使用時間共<b>'.(int)$usetime."</b>秒,姿勢不良時間共<b>".$ngs_sum."</b>秒,姿勢不良時間佔使用時間的<b>".$tmp."%</b>,這次的表現:</font>";
+        echo '本次使用時間共<font color="blue"><b>'.(int)$usetime.'</b>秒</font>,姿勢不良時間共<font color="blue"><b>'.$ngs_sum.'</b>秒</font>,姿勢不良時間佔使用時間的<font color="blue"><b>'.$tmp."%</font></b>,這次的表現:";
         $str="";
-        $tmp<=50?($tmp<=15?($str='<font color="green">非常棒</font>'):($str='<font color="orange">還不錯</font>')):($str='<font color="red">待加強</font>');
+        $tmp<=50?($tmp<=30?($tmp<=15?($str='<font color="blue">非常棒</font>'):($str='<font color="green">還可以</font>')):($str='<font color="orange">須注意</font>')):($str='<font color="red">待加強</font>');
         $str="<b>".$str."</b>";
         echo $str;
 //}

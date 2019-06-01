@@ -72,7 +72,7 @@ if($user!=""){
                 $tmp=number_format(($ngs_sum*100/(int)$usetime2),2);
             }
             $str="";
-            $tmp<=50?($tmp<=15?($str='<font color="green">非常棒</font>'):($str='<font color="orange">還不錯</font>')):($str='<font color="red">待加強</font>');
+            $tmp<=50?($tmp<=30?($tmp<=15?($str='<font color="blue">非常棒</font>'):($str='<font color="green">還可以</font>')):($str='<font color="orange">須注意</font>')):($str='<font color="red">待加強</font>');
             $str="<b>".$str."</b>";
 			echo "<tr bgcolor='#FFFFFF'><td>".$starttime2."</td><td>".$h.":".$m.":".$s."</td><td>".$ngtimes2."</td><td>".($ngtimes2==0?"-":intval($usetime2/$ngtimes2))."</td><td>".($ngtimes2==0?"-":($h2.":".$m2.":".$s2.".".substr(number_format(($ngs_sum-intval($ngs_sum)),3),2)))."</td><td>".$tmp."%</td><td>".$str."</td><td>".($ngtimes2==0?'-':("<a href=".'"'."./ngs.php?user=".$user."&starttime=".$starttime2.'"'.">單次使用紀錄</a>"))."</td></tr>";
 		}
