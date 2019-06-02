@@ -86,6 +86,8 @@ if($user!=""){
 <img src="./barchart.php?user=<?php echo $user;?>">
 <br><br>
 <img src="./ngratelinechart.php?user=<?php echo $user;?>">
+<br><br>
+<img src="./ngratebarchart.php?user=<?php echo $user;?>">
 <?php
       }
 ?>
