@@ -81,13 +81,23 @@ if($user!=""){
 }
 ?>
 <br>
-<img src="./linechart.php?user=<?php echo $user;?>">
-<br><br>
-<img src="./barchart.php?user=<?php echo $user;?>">
-<br><br>
-<img src="./ngratelinechart.php?user=<?php echo $user;?>">
-<br><br>
-<img src="./ngratebarchart.php?user=<?php echo $user;?>">
+<table width='100%' align='center' bgcolor='black'>
+    <tr bgcolor='#FFFFFF'>
+        <th></th>
+        <th align="center">個人</th>
+        <th align="center">團體</th>
+    </tr>
+    <tr bgcolor='#FFFFFF'>
+        <th align="center">平均警示時間</th>
+        <td><img src="./linechart.php?user=<?php echo $user;?>"></td>
+        <td><img src="./barchart.php?user=<?php echo $user;?>"></td>
+    </tr>
+    <tr bgcolor='#FFFFFF'>
+        <th align="center">姿勢不良率</th>
+        <td><img src="./ngratelinechart.php?user=<?php echo $user;?>"></td>
+        <td><img src="./ngratebarchart.php?user=<?php echo $user;?>"></td>
+    </tr>
+</table>
 <?php
       }
 ?>
