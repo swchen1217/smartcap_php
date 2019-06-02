@@ -76,7 +76,7 @@ if($user != "" && $starttime!="")
 	$graph->legend->SetFrameWeight(1);
 	$graph->legend->SetColor('#4E4E4E','#00A78A');
 	$graph->legend->SetMarkAbsSize(8);
-    $graph->legend->SetPos(0,0,'right','top');
+    $graph->legend->SetPos(0.01,0.01,'right','top');
 
 
 	// Output line

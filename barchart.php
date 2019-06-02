@@ -19,10 +19,10 @@ if($user != "")
 
     $graph->SetMargin(45,10,20,20);
 	$graph->title->SetFont(FF_BIG5);
-	$graph->title->Set(mb_convert_encoding($user,"big5","utf-8").'與其他使用者比較長條圖');
+	$graph->title->Set(mb_convert_encoding($user,"big5","utf-8").'平均警示時間與其他使用者比較長條圖');
     $graph -> yaxis -> title -> SetFont ( FF_BIG5 );
     $graph -> xaxis -> title -> SetFont ( FF_BIG5 );
-    $graph->xaxis->SetTitle('次數','high');
+    $graph->xaxis->SetTitle('次數(第n次)','high');
     $graph->yaxis->SetTitle('秒 間時示警均平','high');
     $graph->xaxis->SetTitlemargin(10);
     $graph->yaxis->SetTitlemargin(35);
@@ -50,7 +50,7 @@ if($user != "")
 	}
 	$b1plot = new BarPlot($data1);
     //$b1plot->value->Show();
-	$b1plot->SetLegend(mb_convert_encoding($user,"big5","utf-8").'的平均警示時間');
+	$b1plot->SetLegend(mb_convert_encoding($user,"big5","utf-8"));
 	$b1plot->SetColor("white");
 	$b1plot->SetFillColor("#cc1111");
     /*$b1plot->value->SetFormat('%d');
@@ -75,7 +75,7 @@ if($user != "")
 			$i++;
 		}
 		$b1plot = new BarPlot($data1);	
-		$b1plot->SetLegend(mb_convert_encoding($uu,"big5","utf-8").'的平均警示時間');
+		$b1plot->SetLegend(mb_convert_encoding($uu,"big5","utf-8"));
 		$b1plot->SetColor("white");
 		$b1plot->SetFillColor("#".$color[(($idx)%16)].$color[(($idx)%16)].$color[(($idx*7)%16)].$color[(($idx*7)%16)].$color[(($idx*5)%16)].$color[(($idx*5)%16)]);
 		$groupbar[$idx] = $b1plot;
@@ -92,7 +92,7 @@ if($user != "")
 	$graph->legend->SetFrameWeight(1);
 	$graph->legend->SetColor('#4E4E4E','#00A78A');
 	$graph->legend->SetMarkAbsSize(8);
-    $graph->legend->SetPos(0,0,'right','top');
+    $graph->legend->SetPos(0.01,0.01,'right','top');
     $graph->legend->SetLayout(LEGEND_VERT);
 
 
