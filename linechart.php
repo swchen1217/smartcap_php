@@ -3,6 +3,7 @@ require("config.php");
 define('TTF_DIR', './jpgraph/fonts/');
 include('jpgraph/jpgraph.php');
 include('jpgraph/jpgraph_line.php');
+include('jpgraph/jpgraph_bar.php');
 
 $user = "";
 if(isset($_GET["user"]))
@@ -22,7 +23,7 @@ if($user != "")
 	$graph->title->Set(mb_convert_encoding($user,"big5","utf-8").'平均警示時間折線圖');
     $graph -> yaxis -> title -> SetFont ( FF_BIG5 );
     $graph -> xaxis -> title -> SetFont ( FF_BIG5 );
-    $graph->xaxis->SetTitle('開始時間','high');
+    $graph->xaxis->SetTitle('穿戴時間','high');
     $graph->yaxis->SetTitle('秒 間時示警均平','high');
     $graph->xaxis->SetTitlemargin(10);
     $graph->yaxis->SetTitlemargin(35);
@@ -51,15 +52,48 @@ if($user != "")
 
 	$graph->xaxis->SetTickLabels($label);
 	$graph->ygrid->SetFill(false);
+    
+    /*if($idx<2){
+        $b1 = new BarPlot($data1);
+        $graph->Add($b1);
+        
+        $b1->SetLegend(mb_convert_encoding($user,"big5","utf-8"));
+        $b1->SetColor("white");
+        $b1->SetFillColor("#164fb6");
+        
+        $b1->value->SetFormat('%d');
+        $b1->value->SetColor('black');
+        $b1->value->SetMargin(8);
+        $b1->value->SetAlign("");
+        //$b1->value->Show();
+        
+        
+    }else{
+        $p1 = new LinePlot($data1);
+        $graph->Add($p1);
+
+        $p1->SetColor("#164fb6");
+        $p1->SetLegend('平均警示時間');
+        $p1->mark->SetType(MARK_FILLEDCIRCLE,'',1.0);
+        $p1->mark->SetColor('#164fb6');
+        $p1->mark->SetFillColor('#164fb6');
+        $p1->SetCenter();
+        $p1->SetWeight(4);
+        $p1->value->SetFormat('%d');
+        $p1->value->Show();
+        $p1->value->SetColor('black');
+        $p1->value->SetMargin(8);
+        
+    }*/
 
 	$p1 = new LinePlot($data1);
 	$graph->Add($p1);
 
-	$p1->SetColor("#55bbdd");
+	$p1->SetColor("#164fb6");
 	$p1->SetLegend('平均警示時間');
 	$p1->mark->SetType(MARK_FILLEDCIRCLE,'',1.0);
-	$p1->mark->SetColor('#55bbdd');
-	$p1->mark->SetFillColor('#55bbdd');
+	$p1->mark->SetColor('#164fb6');
+	$p1->mark->SetFillColor('#164fb6');
 	$p1->SetCenter();
     $p1->SetWeight(4);
     $p1->value->SetFormat('%d');

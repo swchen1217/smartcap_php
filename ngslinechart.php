@@ -60,11 +60,11 @@ if($user != "" && $starttime!="")
 	$graph->Add($p1);
 
 
-	$p1->SetColor("#55bbdd");
+	$p1->SetColor("#164fb6");
 	$p1->SetLegend('姿勢不良持續時間');
 	$p1->mark->SetType(MARK_FILLEDCIRCLE,'',1.0);
-	$p1->mark->SetColor('#55bbdd');
-	$p1->mark->SetFillColor('#55bbdd');
+	$p1->mark->SetColor('#164fb6');
+	$p1->mark->SetFillColor('#164fb6');
 	$p1->SetCenter();
     $p1->SetWeight(4);
     //$p1->value->SetFormat('%d');
